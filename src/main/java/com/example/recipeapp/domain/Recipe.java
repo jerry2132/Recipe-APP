@@ -1,7 +1,13 @@
 package com.example.recipeapp.domain;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Recipe {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String description;
     private Integer prepTime;
     private Integer cookTime;
@@ -10,8 +16,18 @@ public class Recipe {
     private String url;
     private String direction;
     //todo add
+    @Lob
     private Byte[] image;
+    @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getDescription() {
         return description;
