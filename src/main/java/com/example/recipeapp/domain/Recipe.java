@@ -2,6 +2,7 @@ package com.example.recipeapp.domain;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,11 +17,13 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
-    private String direction;
+    @Lob
+    private String directions;
     //todo add
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
+
     @Lob
     private Byte[] image;
     @Enumerated(value = EnumType.STRING)
@@ -31,7 +34,7 @@ public class Recipe {
     @JoinTable(name = "recipe_category",
             joinColumns =@JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -89,12 +92,12 @@ public class Recipe {
         this.url = url;
     }
 
-    public String getDirection() {
-        return direction;
+    public String getDirections() {
+        return directions;
     }
 
-    public void setDirection(String direction) {
-        this.direction = direction;
+    public void setDirections(String direction) {
+        this.directions = directions;
     }
 
     public Byte[] getImage() {
