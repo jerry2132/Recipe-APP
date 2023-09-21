@@ -3,8 +3,12 @@ package com.example.recipeapp.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
+@Getter
+@Setter
 @Data
 @EqualsAndHashCode(exclude = {"recipe"})
 @Entity
